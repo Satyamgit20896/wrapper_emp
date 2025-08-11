@@ -4,11 +4,11 @@ import base64
 
 app = Flask(__name__)
 
-# 🔐 Basic Auth credentials
+# Basic Auth credentials
 USERNAME = 'satyam'
 PASSWORD = 'Pass@word1'
 
-# 🔐 Auth check decorator
+# Auth check decorator
 def require_auth(f):
     def wrapper(*args, **kwargs):
         auth = request.headers.get('Authorization')
@@ -26,22 +26,22 @@ def require_auth(f):
     wrapper.__name__ = f.__name__
     return wrapper
 
-# 🔗 Database connection details
+#  Database connection details
 server = r'DESKTOP-G1HG1TH\SQLEXPRESS'
 database = 'Excel_Data'
 driver = '{SQL Server}'
 conn_str = f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
 
-# 🔌 Connect to SQL Server
+# Connect to SQL Server
 try:
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
-    print("✅ Connected to SQL Server.")
+    print(" Connected to SQL Server.")
 except Exception as e:
-    print("❌ Connection failed:", e)
+    print(" Connection failed:", e)
     exit()
 
-# 📡 GET all employees
+# GET all employees
 @app.route('/employees', methods=['GET'])
 @require_auth
 def get_employees():
@@ -72,7 +72,7 @@ def get_employees():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# 📡 GET employee by string ID
+# GET employee by string ID
 @app.route('/employees/<emp_id>', methods=['GET'])
 @require_auth
 def get_employee_by_id(emp_id):
@@ -103,7 +103,7 @@ def get_employee_by_id(emp_id):
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# 📝 POST API to insert new employee
+# POST API to insert new employee
 @app.route('/employees', methods=['POST'])
 @require_auth
 def add_employee():
@@ -141,7 +141,7 @@ def add_employee():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# 🔄 PUT API to update employee by string ID
+# PUT API to update employee by string ID
 @app.route('/employees/<emp_id>', methods=['PUT'])
 @require_auth
 def update_employee(emp_id):
@@ -183,6 +183,7 @@ def update_employee(emp_id):
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# 🚀 Run the Flask app
+# Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
+
