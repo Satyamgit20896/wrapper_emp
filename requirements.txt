@@ -1,6 +1,7 @@
-flask
-requests
-reportlab
-openpyxl
-gunicorn
-
+fastapi==0.115.5
+uvicorn==0.32.0
+python-jose==3.3.0
+mysql-connector-python==9.0.0
+pydantic==2.10.6
+python-multipart==0.0.9
+gunicorn==25.1.0
