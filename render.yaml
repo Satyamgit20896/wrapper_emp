@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: sqldb-api
+    runtime: python
+    pythonVersion: 3.11.9
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -k uvicorn.workers.UvicornWorker sqldb_api:app
+    envVars:
+      - key: WEB_CONCURRENCY
+        value: 1
